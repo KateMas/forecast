@@ -1,7 +1,10 @@
+var path = require('path');
+
 module.exports = {
     entry: './app/App.js',
     output: {
-        filename: 'public/bundle.js'
+        path: path.resolve('./public/'),
+        filename: 'bundle.js'
     },
     module: {
         loaders: [
@@ -10,7 +13,7 @@ module.exports = {
                 exclude: /node_modules/,
                 loader: 'babel',
                 query: {
-                    preset:['es2015', 'react']
+                    presets:['es2015', 'react']
                 }
             }
         ]
