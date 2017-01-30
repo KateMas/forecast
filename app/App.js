@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+//import Forecast from './Forecast';
 import Answer from './Answer';
 
-class Forecast extends React.Component {
+class Request extends React.Component {
     constructor(props) {
         super(props);
         this.state = {value: ''};
@@ -36,6 +37,14 @@ class Forecast extends React.Component {
 }
 
 ReactDOM.render(
-    <Forecast/>,
+    <Request/>,
+    document.getElementById('app')
+);
+
+
+
+
+ReactDOM.render(
+    <Request />,
     document.getElementById('app')
 );

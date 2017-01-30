@@ -68,14 +68,16 @@ var bundle =
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	//import Forecast from './Forecast';
 
-	var Forecast = function (_React$Component) {
-	    _inherits(Forecast, _React$Component);
 
-	    function Forecast(props) {
-	        _classCallCheck(this, Forecast);
+	var Request = function (_React$Component) {
+	    _inherits(Request, _React$Component);
 
-	        var _this = _possibleConstructorReturn(this, (Forecast.__proto__ || Object.getPrototypeOf(Forecast)).call(this, props));
+	    function Request(props) {
+	        _classCallCheck(this, Request);
+
+	        var _this = _possibleConstructorReturn(this, (Request.__proto__ || Object.getPrototypeOf(Request)).call(this, props));
 
 	        _this.state = { value: '' };
 
@@ -84,7 +86,7 @@ var bundle =
 	        return _this;
 	    }
 
-	    _createClass(Forecast, [{
+	    _createClass(Request, [{
 	        key: 'handleChange',
 	        value: function handleChange(event) {
 	            this.setState({ value: event.target.value });
@@ -121,10 +123,12 @@ var bundle =
 	        }
 	    }]);
 
-	    return Forecast;
+	    return Request;
 	}(_react2.default.Component);
 
-		_reactDom2.default.render(_react2.default.createElement(Forecast, null), document.getElementById('app'));
+	_reactDom2.default.render(_react2.default.createElement(Request, null), document.getElementById('app'));
+
+		_reactDom2.default.render(_react2.default.createElement(Request, null), document.getElementById('app'));
 
 /***/ },
 /* 1 */
@@ -21905,7 +21909,7 @@ var bundle =
 	            var _this2 = this;
 
 	            var key = "98c355d73f22c6eb33c4bc0bd22031fe";
-	            fetch('http://api.openweathermap.org/data/2.5/weather?q=odessa' + '&APPID=' + key).then(function (response) {
+	            fetch('https://api.openweathermap.org/data/2.5/weather?q=london' + '&APPID=' + key + '&units=metric').then(function (response) {
 	                return response.json();
 	            }).then(function (res) {
 	                _this2.setState({
@@ -21916,9 +21920,13 @@ var bundle =
 	    }, {
 	        key: 'render',
 	        value: function render() {
-	            //console.log(this.state.city);
+	            console.log(this.state.city);
+	            console.log(this.state.city.name);
 	            console.log(this.state.city.main);
 	            var city = this.state.city.main;
+	            var cityName = this.state.city.name;
+	            var wind = this.state.city.wind;
+	            var country = this.state.city.sys;
 	            var answer = function () {
 
 	                for (var item in city) {
@@ -21927,17 +21935,24 @@ var bundle =
 	                        'div',
 	                        { className: 'answer' },
 	                        _react2.default.createElement(
+	                            'h3',
+	                            null,
+	                            cityName,
+	                            ', ',
+	                            country.country
+	                        ),
+	                        _react2.default.createElement(
 	                            'ul',
 	                            null,
 	                            _react2.default.createElement(
 	                                'li',
 	                                null,
-	                                'temp'
+	                                't\xB0'
 	                            ),
 	                            _react2.default.createElement(
 	                                'li',
 	                                null,
-	                                city.temp
+	                                Math.round(city.temp)
 	                            )
 	                        ),
 	                        _react2.default.createElement(
@@ -21946,12 +21961,46 @@ var bundle =
 	                            _react2.default.createElement(
 	                                'li',
 	                                null,
-	                                'humidity'
+	                                'Humidity',
+	                                _react2.default.createElement('br', null),
+	                                '(%)'
 	                            ),
 	                            _react2.default.createElement(
 	                                'li',
 	                                null,
 	                                city.humidity
+	                            )
+	                        ),
+	                        _react2.default.createElement(
+	                            'ul',
+	                            null,
+	                            _react2.default.createElement(
+	                                'li',
+	                                null,
+	                                'Pressure',
+	                                _react2.default.createElement('br', null),
+	                                '(mm Hg)'
+	                            ),
+	                            _react2.default.createElement(
+	                                'li',
+	                                null,
+	                                city.pressure * 0.75
+	                            )
+	                        ),
+	                        _react2.default.createElement(
+	                            'ul',
+	                            null,
+	                            _react2.default.createElement(
+	                                'li',
+	                                null,
+	                                'Wind',
+	                                _react2.default.createElement('br', null),
+	                                '(meter/sec)'
+	                            ),
+	                            _react2.default.createElement(
+	                                'li',
+	                                null,
+	                                wind.speed
 	                            )
 	                        )
 	                    );
